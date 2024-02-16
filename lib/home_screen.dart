@@ -10,28 +10,42 @@ class HomeScreen extends StatelessWidget {
         title: const Text('App de componenetes de flutter'),
       ),
       body: ListView(
-        children: const <Widget> [
+        children:  <Widget> [
           ListTile(
-            title: Text('Entradas'),
-            subtitle: Text('Recuperar información de TextField'),
-            leading: Icon(Icons.inbox_rounded),
-            trailing: Icon(Icons.arrow_right_outlined),
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Lista infinita'),
-            subtitle: Text('Recuperar muchos elementos'),
-            leading: Icon(Icons.list_alt_sharp),
-            trailing: Icon(Icons.arrow_right_outlined),
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Notificaciones'),
-            subtitle: Text('Manejo de Notificaciones'),
-            leading: Icon(Icons.notification_important),
-            trailing: Icon(Icons.arrow_right_outlined),
-          ),
+            title: Text('Entradas',
+            style: Theme.of(context).textTheme.headlineLarge,
+              ),
 
+            subtitle: Text(
+              'Recuperar información de TextField',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            leading:const Icon(Icons.inbox_rounded),
+            trailing:const Icon(Icons.arrow_right_outlined),
+          ),
+          const Divider(),
+          ListTile(
+            title: Text(
+              'Lista infinita',
+              style: Theme.of(context).textTheme.headlineLarge,),
+            subtitle: Text(
+              'Recuperar muchos elementos',
+              style: Theme.of(context).textTheme.bodySmall,
+              ),
+            leading:const Icon(Icons.list_alt_sharp),
+            trailing:const Icon(Icons.arrow_right_outlined),
+          ),
+          const Divider(),
+          ListTile(
+            title: Text(
+              'Notificaciones',
+              style: Theme.of(context).textTheme.headlineLarge,),
+            subtitle: Text(
+              'Manejo de Notificaciones',
+              style: Theme.of(context).textTheme.bodySmall,),
+            leading:const Icon(Icons.notification_important),
+            trailing:const Icon(Icons.arrow_right_outlined),
+          ),
         ],
       ),
     );
