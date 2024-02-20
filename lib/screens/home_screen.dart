@@ -20,10 +20,10 @@ class HomeScreen extends StatelessWidget {
 
             subtitle: Text(
               'Recuperar información de TextField',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: AppTheme.lightTheme.textTheme.bodySmall,
             ),
-            leading:const Icon(Icons.inbox_rounded),
-            trailing:const Icon(Icons.arrow_right_outlined),
+            leading:const Icon(Icons.inbox_rounded, color: AppTheme.primaryColor,),
+            trailing:const Icon(Icons.arrow_right_outlined, color: AppTheme.primaryColor,),
           ),
           const Divider(),
           ListTile(
@@ -32,10 +32,10 @@ class HomeScreen extends StatelessWidget {
               style: AppTheme.lightTheme.textTheme.headlineLarge,),
             subtitle: Text(
               'Recuperar muchos elementos',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: AppTheme.lightTheme.textTheme.bodySmall,
               ),
-            leading:const Icon(Icons.list_alt_sharp),
-            trailing:const Icon(Icons.arrow_right_outlined),
+            leading:const Icon(Icons.list_alt_sharp, color: AppTheme.primaryColor,),
+            trailing:const Icon(Icons.arrow_right_outlined, color: AppTheme.primaryColor,),
           ),
           const Divider(),
           ListTile(
@@ -44,9 +44,9 @@ class HomeScreen extends StatelessWidget {
               style: AppTheme.lightTheme.textTheme.headlineLarge,),
             subtitle: Text(
               'Manejo de Notificaciones',
-              style: Theme.of(context).textTheme.bodySmall,),
-            leading:const Icon(Icons.notification_important),
-            trailing:const Icon(Icons.arrow_right_outlined),
+              style: AppTheme.lightTheme.textTheme.bodySmall,),
+            leading:const Icon(Icons.notification_important, color: AppTheme.primaryColor,),
+            trailing:const Icon(Icons.arrow_right_outlined, color: AppTheme.primaryColor,),
           ),
         ],
       ),

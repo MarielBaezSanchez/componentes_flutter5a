@@ -18,13 +18,18 @@ class AppTheme {
       headlineLarge: GoogleFonts.gabriela(
         fontSize: 27.0,
         fontWeight: FontWeight.bold,
-        color: primaryColor,          //fontFamily: GoogleFonts.dancingScript(),
+        color: primaryColor,
+        decoration: TextDecoration.underline,
+        decorationColor: primaryColor,
+        decorationStyle: TextDecorationStyle.double,
+        decorationThickness: 1.0,        //fontFamily: GoogleFonts.dancingScript(),
         ),
         //fuente para textos muy pequeños
         bodySmall: GoogleFonts.montserrat(
           fontSize: 15.0,
           fontWeight: FontWeight.w500,
           color: secondaryColor,
+          fontStyle: FontStyle.italic
         ),
       ));
 }
