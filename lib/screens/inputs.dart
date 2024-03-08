@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:practica3/screens/home_screen.dart';
+import 'package:practica3/screens/images_screen.dart';
+import 'package:practica3/screens/infinite_list.dart';
+import 'package:practica3/screens/notification.dart';
 import 'package:practica3/theme/app_theme.dart';
 
 class Inputs extends StatefulWidget {
@@ -15,6 +19,7 @@ class _InputsState extends State<Inputs> {
   bool postreCheck1 = false;
   bool postreCheck2 = false;
   bool postreCheck3 = false;
+  int selectedIndex = 0; //elemento seleccionado de la BottomNavigationBar
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,7 @@ class _InputsState extends State<Inputs> {
         ),
       ),
       body: ListView(
-        children:[
+        children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -36,30 +41,72 @@ class _InputsState extends State<Inputs> {
                 entradasRadio(),
                 Text(
                   '¿Qué postres te gustan',
-                style: AppTheme.lightTheme.textTheme.headlineLarge,
-              ),
-              entradasCheck(),
-              const ElevatedButton(
-                onPressed: null,
-                child: Text(
-                  'DataScreen',
+                  style: AppTheme.lightTheme.textTheme.headlineLarge,
                 ),
-              ),
-            ],
+                entradasCheck(),
+                const ElevatedButton(
+                  onPressed: null,
+                  child: Text(
+                    'DataScreen',
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) => openScreen(context, index),
+        backgroundColor: AppTheme.widgetsColor,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            backgroundColor: AppTheme.backColor,
+            icon: Icon(Icons.home, color: AppTheme.disableWidgetColor,),
             label: 'Inicio',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.next_plan), label: 'Datos'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list, color: AppTheme.disableWidgetColor,),
+            label: 'Lista',
+            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications, color: AppTheme.disableWidgetColor,),
+            label: 'Notificaciones',
+            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.image, color: AppTheme.disableWidgetColor,),
+            label: 'Imágenes',
+            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.exit_to_app, color: AppTheme.disableWidgetColor,),
+            label: 'Salir',
+            ),
         ],
       ),
     );
+  }
+
+  openScreen(BuildContext context, int index) {
+    MaterialPageRoute ruta =
+        MaterialPageRoute(builder: (context) => const HomeScreen());
+    switch (index) {
+      case 0:
+        ruta = MaterialPageRoute(builder: (context) => const HomeScreen());
+        break;
+      case 1:
+        ruta = MaterialPageRoute(builder: (context) => const InfiniteList());
+        break;
+      case 2:
+        ruta = MaterialPageRoute(builder: (context) => const Notifications());
+        break;
+      case 3:
+        ruta = MaterialPageRoute(builder: (context) => const ImagesScreen());
+        break;
+    }
+    setState(() {
+      selectedIndex;
+      Navigator.push(context, ruta);
+    });
   }
 
   TextField entradaTexto() {
@@ -173,36 +220,33 @@ class _InputsState extends State<Inputs> {
             setState(() {
               postreCheck1 = value!;
             });
-          }
+          }),
         ),
-    ),
-    Text(
-      'Chocoflan',
-      style: AppTheme.lightTheme.textTheme.bodySmall,
-    ),
-    Checkbox(
+        Text(
+          'Chocoflan',
+          style: AppTheme.lightTheme.textTheme.bodySmall,
+        ),
+        Checkbox(
           value: postreCheck2,
           onChanged: ((value) {
             setState(() {
               postreCheck2 = value!;
             });
-          }
+          }),
         ),
-    ),
-    Text(
-      'Pozole',
-      style: AppTheme.lightTheme.textTheme.bodySmall,
-    ),
-    Checkbox(
+        Text(
+          'Pozole',
+          style: AppTheme.lightTheme.textTheme.bodySmall,
+        ),
+        Checkbox(
           value: postreCheck3,
           onChanged: ((value) {
             setState(() {
               postreCheck3 = value!;
             });
-          }
+          }),
         ),
-    ),
-    ],
+      ],
     );
   }
 }
