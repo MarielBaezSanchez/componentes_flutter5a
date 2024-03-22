@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:practica3/models/data.dart';
-import 'package:practica3/screens/home_screen.dart';
-import 'package:practica3/screens/images_screen.dart';
-import 'package:practica3/screens/infinite_list.dart';
-import 'package:practica3/screens/inputs.dart';
 import 'package:practica3/screens/notification.dart';
 import 'package:practica3/theme/app_theme.dart';
+import 'package:practica3/screens/home_screen.dart';
+import 'package:practica3/screens/infinite_list.dart';
+import 'package:practica3/screens/inputs.dart';
+import 'package:practica3/screens/images_screen.dart';
 
 class DataScreen extends StatefulWidget {
   final Data datos;
-  const DataScreen({super.key, required this.datos});
+  const DataScreen({Key? key, required this.datos}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DataScreenState createState() => _DataScreenState();
+  State<DataScreen> createState() => _DataScreenState();
 }
 
 class _DataScreenState extends State<DataScreen> {
@@ -21,50 +20,74 @@ class _DataScreenState extends State<DataScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String? respuesta;
+    if (widget.datos.pastel == true) {
+      respuesta = 'Te gusta el pastel';
+    } else if (widget.datos.helado == true) {
+      respuesta = 'Te gusta el helado';
+    } else if (widget.datos.chocoflan == true) {
+      respuesta = 'Te gusta el chocoflan';
+    } else {
+      respuesta = 'No has seleccionado ningún postre';
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DataScreen'),
+        title: Text(
+          'DataScreen',
+          style: AppTheme.lightTheme.textTheme.headlineLarge,
+        ),
       ),
-      body: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // Alinie los widgets al inicio
-        children: [
-          Text(
-            "Tu nombre es: ",
-            style: AppTheme.lightTheme.textTheme.headlineLarge,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            "Te gusta Flutter: ",
-            style: AppTheme.lightTheme.textTheme.headlineLarge,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            "Nivel de gusto por flutter: ",
-            style: AppTheme.lightTheme.textTheme.headlineLarge,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            "Prefieres: ",
-            style: AppTheme.lightTheme.textTheme.headlineLarge,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            "Postre que prefieres: ",
-            style: AppTheme.lightTheme.textTheme.headlineLarge,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'El nombre que escribiste es: ',
+              style: AppTheme.lightTheme.textTheme.headlineLarge,
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              widget.datos.nombre ?? 'No proporcionado',
+              textAlign: TextAlign.left,
+              style: const TextStyle(color: AppTheme.secondaryColor),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'El postre que seleccionaste es: ',
+              style: AppTheme.lightTheme.textTheme.headlineLarge,
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              respuesta,
+              textAlign: TextAlign.left,
+              style: const TextStyle(color: AppTheme.secondaryColor),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Seleccionaste la comida: ',
+              style: AppTheme.lightTheme.textTheme.headlineLarge,
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              widget.datos.comida ?? 'No proporcionado',
+              textAlign: TextAlign.left,
+              style: const TextStyle(color: AppTheme.secondaryColor),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'El nivel que seleccionaste en tu gusto de Flutter es: ',
+              style: AppTheme.lightTheme.textTheme.headlineLarge,
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              widget.datos.califFlutter?.toString() ?? 'No proporcionado',
+              textAlign: TextAlign.left,
+              style: const TextStyle(color: AppTheme.secondaryColor),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
@@ -85,16 +108,12 @@ class _DataScreenState extends State<DataScreen> {
             label: 'Notificaciones',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.exit_to_app, color: AppTheme.disableWidgetColor),
-            label: 'Salir',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.edit, color: AppTheme.disableWidgetColor),
             label: 'Entradas',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.image, color: AppTheme.disableWidgetColor),
-            label: 'Image',
+            label: 'Imágenes',
           ),
         ],
       ),
@@ -102,8 +121,7 @@ class _DataScreenState extends State<DataScreen> {
   }
 
   void openScreen(BuildContext context, int index) {
-    MaterialPageRoute ruta =
-        MaterialPageRoute(builder: (context) => const HomeScreen());
+    MaterialPageRoute ruta = MaterialPageRoute(builder: (context) => const HomeScreen());
     switch (index) {
       case 0:
         ruta = MaterialPageRoute(builder: (context) => const HomeScreen());
@@ -114,10 +132,10 @@ class _DataScreenState extends State<DataScreen> {
       case 2:
         ruta = MaterialPageRoute(builder: (context) => const Notifications());
         break;
-      case 4:
+      case 3:
         ruta = MaterialPageRoute(builder: (context) => const Inputs());
         break;
-      case 5:
+      case 4:
         ruta = MaterialPageRoute(builder: (context) => const ImagesScreen());
         break;
       default:
